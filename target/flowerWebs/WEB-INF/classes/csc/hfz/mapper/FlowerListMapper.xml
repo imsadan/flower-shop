@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="csc.hfz.mapper.FlowerListMapper" >
+  <resultMap id="BaseResultMap" type="csc.hfz.pojo.FlowerList" >
+    <id column="flowerid" property="flowerid" jdbcType="INTEGER" />
+    <result column="flowername" property="flowername" jdbcType="VARCHAR" />
+    <result column="flowerlanguage" property="flowerlanguage" jdbcType="VARCHAR" />
+    <result column="flowerprice" property="flowerprice" jdbcType="DOUBLE" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    flowerid, flowername, flowerlanguage, flowerprice, image, number, cid, status, created, 
+    updated
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="csc.hfz.pojo.FlowerListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flower_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from flower_list
+    where flowerid = #{flowerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flower_list
+    where flowerid = #{flowerid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="csc.hfz.pojo.FlowerListExample" >
+    delete from flower_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="csc.hfz.pojo.FlowerList" >
+    insert into flower_list (flowerid, flowername, flowerlanguage, 
+      flowerprice, image, number, 
+      cid, status, created, 
+      updated)
+    values (#{flowerid,jdbcType=INTEGER}, #{flowername,jdbcType=VARCHAR}, #{flowerlanguage,jdbcType=VARCHAR}, 
+      #{flowerprice,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{cid,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="csc.hfz.pojo.FlowerList" >
+    insert into flower_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowerid != null" >
+        flowerid,
+      </if>
+      <if test="flowername != null" >
+        flowername,
+      </if>
+      <if test="flowerlanguage != null" >
+        flowerlanguage,
+      </if>
+      <if test="flowerprice != null" >
+        flowerprice,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="updated != null" >
+        updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowerid != null" >
+        #{flowerid,jdbcType=INTEGER},
+      </if>
+      <if test="flowername != null" >
+        #{flowername,jdbcType=VARCHAR},
+      </if>
+      <if test="flowerlanguage != null" >
+        #{flowerlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="flowerprice != null" >
+        #{flowerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="csc.hfz.pojo.FlowerListExample" resultType="java.lang.Integer" >
+    select count(*) from flower_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update flower_list
+    <set >
+      <if test="record.flowerid != null" >
+        flowerid = #{record.flowerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowername != null" >
+        flowername = #{record.flowername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowerlanguage != null" >
+        flowerlanguage = #{record.flowerlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowerprice != null" >
+        flowerprice = #{record.flowerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null" >
+        updated = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update flower_list
+    set flowerid = #{record.flowerid,jdbcType=INTEGER},
+      flowername = #{record.flowername,jdbcType=VARCHAR},
+      flowerlanguage = #{record.flowerlanguage,jdbcType=VARCHAR},
+      flowerprice = #{record.flowerprice,jdbcType=DOUBLE},
+      image = #{record.image,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      updated = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="csc.hfz.pojo.FlowerList" >
+    update flower_list
+    <set >
+      <if test="flowername != null" >
+        flowername = #{flowername,jdbcType=VARCHAR},
+      </if>
+      <if test="flowerlanguage != null" >
+        flowerlanguage = #{flowerlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="flowerprice != null" >
+        flowerprice = #{flowerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where flowerid = #{flowerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="csc.hfz.pojo.FlowerList" >
+    update flower_list
+    set flowername = #{flowername,jdbcType=VARCHAR},
+      flowerlanguage = #{flowerlanguage,jdbcType=VARCHAR},
+      flowerprice = #{flowerprice,jdbcType=DOUBLE},
+      image = #{image,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP}
+    where flowerid = #{flowerid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from flower_list
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	
+	<!-- 查询记录总数 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from flower_list
+	</select>
+</mapper>
